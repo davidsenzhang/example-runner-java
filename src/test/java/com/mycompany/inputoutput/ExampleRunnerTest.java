@@ -4,18 +4,24 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.PrintStream;
+import java.util.List;
 import java.util.Scanner;
 
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
-import static org.mockito.Mockito.verify;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.atLeastOnce;
 
 class ExampleRunnerTest {
     private PrintStream printStream;
+    private ArgumentCaptor<String> argument;
 
     @BeforeEach
     void setup() {
         printStream = Mockito.mock(PrintStream.class);
+        argument = ArgumentCaptor.forClass(String.class);
     }
 
     @Test
@@ -25,7 +31,11 @@ class ExampleRunnerTest {
 
         runner.execute();
 
-        verify(printStream).println("Hello");
+        verify(printStream, atLeastOnce()).println(argument.capture());
+        final List<String> printResultList = argument.getAllValues();
+
+        assertEquals("Please input your command: ", printResultList.get(0));
+        assertEquals("Hello", printResultList.get(1));
     }
 
     @Test
@@ -35,7 +45,10 @@ class ExampleRunnerTest {
 
         runner.execute();
 
-        verify(printStream, Mockito.times(0)).println("Hello");
-        verify(printStream).println("Hai");
+        verify(printStream, atLeastOnce()).println(argument.capture());
+        final List<String> printResultList = argument.getAllValues();
+
+        assertEquals("Please input your command: ", printResultList.get(0));
+        assertEquals("Hai", printResultList.get(1));
     }
 }

@@ -23,6 +23,7 @@ public class ExampleRunner {
     }
 
     void execute() {
+        this.output.println("Please input your command: ");
         String command = this.input.nextLine();
         String message = getMessage(command);
         this.output.println(message);
