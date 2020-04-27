@@ -1,5 +1,6 @@
 package com.mycompany.inputoutput;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.PrintStream;
@@ -10,10 +11,16 @@ import org.mockito.Mockito;
 import static org.mockito.Mockito.verify;
 
 class ExampleRunnerTest {
+    private PrintStream printStream;
+
+    @BeforeEach
+    void setup() {
+        printStream = Mockito.mock(PrintStream.class);
+    }
+
     @Test
     void execute_shouldDoPrintHello_whenInputIsHashtag1() {
         Scanner scanner = new Scanner("#1");
-        PrintStream printStream = Mockito.mock(PrintStream.class);
         final ExampleRunner runner = new ExampleRunner(scanner, printStream);
 
         runner.execute();
@@ -24,7 +31,6 @@ class ExampleRunnerTest {
     @Test
     void execute_shouldDoPrintHai_whenInputIsHashtag2() {
         Scanner scanner = new Scanner("#2");
-        PrintStream printStream = Mockito.mock(PrintStream.class);
         final ExampleRunner runner = new ExampleRunner(scanner, printStream);
 
         runner.execute();
