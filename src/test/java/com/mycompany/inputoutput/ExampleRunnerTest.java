@@ -26,7 +26,7 @@ class ExampleRunnerTest {
 
     @Test
     void execute_shouldDoPrintHello_whenInputIsHashtag1() {
-        Scanner scanner = new Scanner("#1");
+        Scanner scanner = new Scanner("#1\nAlice follows Bob");
         final ExampleRunner runner = new ExampleRunner(scanner, printStream);
 
         runner.execute();
@@ -36,6 +36,8 @@ class ExampleRunnerTest {
 
         assertEquals("Please input your command: ", printResultList.get(0));
         assertEquals("Hello", printResultList.get(1));
+        assertEquals("Good job", printResultList.get(2));
+        assertEquals("Alice follows Bob", printResultList.get(3));
     }
 
     @Test

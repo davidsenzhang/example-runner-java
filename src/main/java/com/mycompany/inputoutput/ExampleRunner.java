@@ -27,5 +27,8 @@ public class ExampleRunner {
         String command = this.input.nextLine();
         String message = getMessage(command);
         this.output.println(message);
+        this.output.println("Good job");
+        String followCommand = this.input.nextLine();
+        this.output.println(followCommand);
     }
 }
